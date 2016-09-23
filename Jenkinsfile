@@ -16,7 +16,6 @@ node {
 
     stage 'Publish'
     /* Push the image to Docker Hub, using credentials we have setup separately on the worker node */
-    app.push 'latest'
     docker.withRegistry('registry.fusion.net:5000') {
         app.push();
     }
