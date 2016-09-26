@@ -22,7 +22,7 @@ node {
     stage 'Test'
     /* We can run tests inside our new image */
     app.inside {
-        sh 'uname -a'
+        sh 'sudo sh run_tests.sh'
     }
 
     }
