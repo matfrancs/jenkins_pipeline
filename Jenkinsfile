@@ -10,19 +10,13 @@ node {
     /* Checkout the code we are currently running against */
     checkout scm
 
-   stage 'Build'
+ /*  stage 'Build'
     /* Build the Docker image with a Dockerfile, tagging it with the build number */
-    def app = docker.build "docker/whalesay:${env.BUILD_NUMBER}"
+ /*   def app = docker.build "docker/whalesay:${env.BUILD_NUMBER}" */
 
-    stage 'Publish'
+    stage 'Pulling'
     /* Push the image to Docker Hub, using credentials we have setup separately on the worker node */
-    sh "docker tag docker/whalesay:${env.BUILD_NUMBER} registry.fusion.local:5000/jenkins:${env.BUILD_NUMBER}"
-    sh "docker push registry.fusion.local:5000/jenkins:${env.BUILD_NUMBER}"
- 
-    stage 'Test'
-    /* We can run tests inside our new image */
-    app.inside {
-        sh 'sudo sh run_tests.sh'
-    }
+    sh "docker pull metabase"
+
 
     }
